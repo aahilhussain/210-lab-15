@@ -3,10 +3,13 @@
 #include <fstream> 
 #include <string>
 #include <vector>
+
+
 using namespace std;
 
 const int W15 = 15;
 
+//movie class
 class Movie{
     private:
     string screen_writer;
@@ -14,7 +17,7 @@ class Movie{
     string title;
 
     public:
-    //constructor
+    //initialzing constructor
     Movie() : screen_writer(""), year_released(0), title("") {}
 
     //setters
@@ -27,15 +30,17 @@ class Movie{
     int getYearReleased() const {return year_released;}
     string getTitle() const {return title;}
 
-    void print() {
+    //print function
+    void print() const {
         cout << setw(W15) << "Movie: " << title << endl;
         cout << setw(W15) << "Year released: " << year_released << "\n";
-        cout << "Screenwriter: " << screen_writer << "\n";
+        cout << setw(W15) << "Screenwriter: " << screen_writer << "\n";
     }
 };
 
 int main() {
-    ifstream inputFile("input.txt");
+    //open file
+    ifstream inputFile("lab15.txt");
     if(!inputFile) {
         cerr << "Error opening file" << endl;
         return 1;
@@ -45,17 +50,22 @@ int main() {
     Movie tempMovie;
 
     string open; 
+    //set up and read file
     while (getline(inputFile, open)){
+        if (open.empty()) continue;
         tempMovie.setTitle(open);
-        getline(inputFile, open);
-        tempMovie.setYearReleased(open;)
-        getline(inputFile, line)
-        tempMovie.setScreenWriter(line);
+        if (!getline(inputFile, open) || open.empty()) break;
+        tempMovie.setYearReleased(stoi(open));
+        if (!getline(inputFile, open) || open.empty()) break;
+        tempMovie.setScreenWriter(open);
     
         movies.push_back(tempMovie);
     }
 
     //movie.print is giving error, come back to this
+    //const needed in print function
+
+    //print the movies
     for (const auto& movie : movies) {
         movie.print();
     }
