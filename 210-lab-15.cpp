@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <fstream> 
 #include <string>
+#include <vector>
 using namespace std;
 
 const int W15 = 15;
@@ -24,7 +25,7 @@ class Movie{
     //getters
     string getScreenWriter() const {return screen_writer;}
     int getYearReleased() const {return year_released;}
-    string getTitle() {return title;}
+    string getTitle() const {return title;}
 
     void print() {
         cout << setw(W15) << "Movie: " << title << endl;
@@ -32,3 +33,33 @@ class Movie{
         cout << "Screenwriter: " << screen_writer << "\n";
     }
 };
+
+int main() {
+    ifstream inputFile("input.txt");
+    if(!inputFile) {
+        cerr << "Error opening file" << endl;
+        return 1;
+    }
+
+    vector<Movie> movies;
+    Movie tempMovie;
+
+    string open; 
+    while (getline(inputFile, open)){
+        tempMovie.setTitle(open);
+        getline(inputFile, open);
+        tempMovie.setYearReleased(open;)
+        getline(inputFile, line)
+        tempMovie.setScreenWriter(line);
+    
+        movies.push_back(tempMovie);
+    }
+
+    //movie.print is giving error, come back to this
+    for (const auto& movie : movies) {
+        movie.print();
+    }
+
+    inputFile.close();
+    return 0;
+}
